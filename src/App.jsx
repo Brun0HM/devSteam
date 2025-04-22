@@ -1,7 +1,11 @@
 import "./App.css";
 
 const App = () => {
-  return <div>App</div>;
+  return (
+    <>
+      <h1>devSteam</h1>
+    </>
+  );
 };
 
 export default App;
