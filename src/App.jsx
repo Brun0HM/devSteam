@@ -39,6 +39,16 @@ function App() {
     );
   };
 
+  const handleUpdateCarrinho = (produto, novaQuantidade) => {
+    setCarrinhoItem((itemAnterior) =>
+      itemAnterior.map((item) =>
+        item.id === produto.id
+          ? { ...item, quantidade: novaQuantidade > 0 ? novaQuantidade : 0 }
+          : item
+      )
+    );
+  };
+
   return (
     <>
       <Header contadorJogos={carrinhoItem.length} />
@@ -48,6 +58,7 @@ function App() {
 
       <CarrinhoOffCanvas
         onRemoveCarrinho={handleRemoveCarrinho}
+        onUpdateCarrinho={handleUpdateCarrinho}
         carrinhoItem={carrinhoItem}
       />
     </>
