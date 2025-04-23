@@ -33,11 +33,22 @@ function App() {
     });
   };
 
+  const handleRemoveCarrinho = (produto) => {
+    setCarrinhoItem((itemAnterior) =>
+      itemAnterior.filter((item) => item.id !== produto.id)
+    );
+  };
+
   return (
     <>
       <Header contadorJogos={carrinhoItem.length} />
       <Promotion
         onAddCarrinho={handleAddCarrinho} //adicionando o click para promoção
+      />
+
+      <CarrinhoOffCanvas
+        onRemoveCarrinho={handleRemoveCarrinho}
+        carrinhoItem={carrinhoItem}
       />
     </>
   );

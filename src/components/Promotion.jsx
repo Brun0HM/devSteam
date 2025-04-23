@@ -76,7 +76,7 @@ const Promotion = (props) => {
       </h2>
       <div
         id="itensPromo"
-        className="d-flex flex-wrap gap-4 justify-content-between"
+        className="d-flex flex-wrap gap-4 justify-content-around"
       >
         {/* mapeando um array com react */}
         {games
@@ -91,7 +91,9 @@ const Promotion = (props) => {
               preco={jogo.preco.toFixed(2)}
               desconto={jogo.desconto}
               imagem={jogo.imagem}
-              onAdd={() => props.onAdd(jogo)}
+              //adicionando a opção de click com os itens do jogo no carrinho
+              onAddCarrinho={() => props.onAddCarrinho(jogo)}
+              //callback para adicionar somente um item e não todos os itens do array
             />
           ))}
       </div>
