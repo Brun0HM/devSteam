@@ -28,6 +28,8 @@ const PromoCard = (props) => {
           </div>
         </div>
         <button
+        //adiciona mais um jogo ao carrinho, nao é necessario adicionar uma função callback ou um item interno na função, ex: onAdd(jogo)
+        onClick={props.onAdd}
           id="addCarrinho"
           className="btn btn-success desconto text-light w-100 border-0"
         >

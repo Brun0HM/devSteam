@@ -13,7 +13,7 @@ function App() {
   return (
     <>
       <Header contadorJogos={contador} />
-      <Promotion />
+      <Promotion onAdd={handleAddToCart} />
 
       <button onClick={handleAddToCart}>bla</button>
     </>
