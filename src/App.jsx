@@ -1,21 +1,43 @@
 import "./App.css";
+import CarrinhoOffCanvas from "./components/CarrinhoOffCanvas";
 import Header from "./components/Header";
 import Promotion from "./components/Promotion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
-  const [contador, setContador] = useState(0);
+  const [carrinhoItem, setCarrinhoItem] = useState([]);
 
-  const handleAddToCart = () => {
-    setContador(contador + 1);
+  useEffect(() => {
+    localStorage.setItem("carrinho", JSON.stringify(carrinhoItem));
+  }, [carrinhoItem]);
+  useEffect(() => {
+    const salvaCarrinho = localStorage.getItem("carrinho");
+    salvaCarrinho && setCarrinhoItem(JSON.parse(salvaCarrinho));
+  }, []);
+
+  console.log(localStorage.getItem("carrinho"));
+
+  const handleAddToCart = (produto) => {
+    setCarrinhoItem((ItemAnterior) => {
+      const existente = ItemAnterior.find((item) => item.id === produto.id);
+      if (existente) {
+        return ItemAnterior.map((item) =>
+          item.id === produto.id
+            ? { ...item, quantidade: item.quantidade + 1 }
+            : item
+        );
+      } else {
+        return [...ItemAnterior, { ...produto, quantidade: 1 }];
+      }
+    });
   };
 
   return (
     <>
-      <Header contadorJogos={contador} />
+      <Header contadorJogos={carrinhoItem.length} />
       <Promotion onAdd={handleAddToCart} />
 
-      <button onClick={handleAddToCart}>bla</button>
+      <CarrinhoOffCanvas />
     </>
   );
 }
